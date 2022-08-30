@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>miniputt</title>
+<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" type="text/css" href="https://swagapi.shockwave.com/dist/swag-api.css">
+<script type="text/javascript" src="https://swagapi.shockwave.com/dist/swag-api.js"></script>
+<script type="text/javascript" src="./lib/clipboard.min.js"></script>
+<script type="text/javascript" src="./lib/howler.min.js"></script>
+<script type="text/javascript" src="./game.js"></script>
+<script>
+		//window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, false);
+		if (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio > 2) {
+			var meta = document.getElementById ("viewport");
+			meta.setAttribute ('content', 'width=device-width, initial-scale=' + (2 / window.devicePixelRatio) + ', user-scalable=no');
+		}
+		
+		function visibilityChange() {
+			var hidden = 'hidden'
+
+			// Standards:
+			if (hidden in document)
+				document.addEventListener('visibilitychange', onchange)
+			else if ((hidden = 'mozHidden') in document)
+				document.addEventListener('mozvisibilitychange', onchange)
+			else if ((hidden = 'webkitHidden') in document)
+				document.addEventListener('webkitvisibilitychange', onchange)
+			else if ((hidden = 'msHidden') in document)
+				document.addEventListener('msvisibilitychange', onchange)
+			// IE 9 and lower:
+			else if ('onfocusin' in document)
+				document.onfocusin = document.onfocusout = onchange
+			// All others:
+			else
+				window.onpageshow = window.onpagehide = window.onfocus = window.onblur = onchange
+
+			function onchange(evt) {
+				let v = false,
+					h = true,
+					evtMap = {
+						focus: v,
+						focusin: v,
+						pageshow: v,
+						blur: h,
+						focusout: h,
+						pagehide: h
+					}
+
+				evt = evt || window.event
+
+				let windowHidden = false
+				if (evt.type in evtMap) {
+					windowHidden = evtMap[evt.type]
+				} else {
+					windowHidden = this[hidden]
+				}
+
+				var howl = Howler;
+
+				if (howl) {
+					if (windowHidden) {
+						howl.mute(true)
+					} else {
+						howl.mute(false)
+					}
+				}
+			}
+
+			// set the initial state (but only if browser supports the Page Visibility API)
+			if (document[hidden] !== undefined)
+				onchange({
+					type: document[hidden] ? 'blur' : 'focus'
+				})
+			}
+
+		visibilityChange();
+	</script>
+<style>
+		html,body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+		#openfl-content {}
+
+		canvas {
+			max-width:100%;
+			display:block;
+			margin:auto;
+		}
+
+		
+		@font-face {
+			font-family: 'Swiss921 BT';
+			src: url('assets/fonts/188_Swiss921 BT.woff2') format('woff2');
+			src: url('assets/fonts/188_Swiss921 BT.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Swis721 Md BT';
+			src: url('assets/fonts/142_Swis721 Md BT.woff2') format('woff2');
+			src: url('assets/fonts/142_Swis721 Md BT.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Swis721 Md BT';
+			src: url('assets/fonts/24_Swis721 Md BT.woff2') format('woff2');
+			src: url('assets/fonts/24_Swis721 Md BT.ttf') format('truetype');
+			font-weight: normal;
+			font-style: normal;
+		}
+	</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-143781837-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-143781837-1");</script></head><script>try{var agRegex=RegExp("addictinggames.com");window.SWAGTHEME=!document.referrer||agRegex.test(document.referrer)?"addictinggames":"shockwave"}catch(e){}</script><style>body { -webkit-touch-callout:none; -webkit-tap-highlight-color:rgba(0,0,0,0); } body * { -webkit-touch-callout:none; -webkit-tap-highlight-color:rgba(0,0,0,0); } </style><script>window.addEventListener('keydown', function(e) { if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1 && e.target == document.body) { e.preventDefault(); } }, false);</script><script src="https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.2.0/inobounce.min.js" integrity="sha512-6lLl4/TF28QKaWUwQzDbb0aQRsVWQ8O5hp7gtCzm/EYZTR04AGsxoL1LzjHFTd7s6IAgzRTGsNe+TU+EoHtBYg==" crossorigin="anonymous"></script>
+<body>
+<div id="root">
+<div id="openfl-content"></div>
+</div>
+<script type="text/javascript">
+		lime.embed ("openfl-content", 550, 440, "FFFFFF");
+	</script>
+</body>
+</html>
